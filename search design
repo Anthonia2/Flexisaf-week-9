@@ -1,0 +1,144 @@
+<style>
+.date-range-picker { background-color: #d2c3c3; display: flex; flex-direction: column; overflow: hidden; padding: 35px 23px; }
+@media (max-width: 991px) { .date-range-picker { padding: 0 20px; } }
+.title-container { display: flex; width: 100%; flex-direction: column; justify-content: start; }
+@media (max-width: 991px) { .title-container { max-width: 100%; margin-right: 2px; } }
+.range-title { align-self: start; overflow: hidden; color: rgba(0, 0, 0, 0.85); font: 400 14px/2 PingFang SC, sans-serif; }
+.range-selector { justify-content: space-between; align-items: center; border-radius: 8px; border: 1px solid #d9d9d9; background: #fff; box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04); display: flex; margin-top: 4px; min-height: 40px; max-width: 100%; width: 1231px; gap: 40px 100px; overflow: hidden; flex-wrap: wrap; padding: 7px 16px; }
+.range-text { color: #262626; align-self: stretch; margin: auto 0; font: 500 14px/2 PingFang SC, sans-serif; }
+.range-icon-container { align-self: stretch; display: flex; min-height: 26px; flex-direction: column; align-items: center; justify-content: center; margin: auto 0; padding: 6px 4px; }
+.range-icon { aspect-ratio: 1.67; object-fit: contain; object-position: center; width: 10px; fill: #8c8c8c; }
+.calendar-container { border-radius: 8px; background: #fff; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.1); display: flex; margin-top: 33px; width: 100%; flex-direction: column; align-items: center; text-align: center; padding: 22px 16px 74px; font: 400 14px PingFang SC, sans-serif; }
+@media (max-width: 991px) { .calendar-container { max-width: 100%; } }
+.calendar-header { align-self: stretch; display: flex; width: 100%; gap: 40px 100px; font-size: 16px; color: #202223; font-weight: 600; flex-wrap: wrap; }
+@media (max-width: 991px) { .calendar-header { max-width: 100%; } }
+.month-selector { display: flex; gap: 40px 100px; flex: 1; }
+.month-icon { aspect-ratio: 1; object-fit: contain; object-position: center; width: 20px; }
+.month-text { font-feature-settings: "liga" off, "clig" off; }
+.weekdays { display: flex; margin-top: 64px; width: 100%; max-width: 1106px; gap: 20px; font-size: 12px; color: #6d7175; white-space: nowrap; line-height: 1; justify-content: space-between; }
+@media (max-width: 991px) { .weekdays { max-width: 100%; margin-top: 40px; white-space: initial; } }
+.weekday { font-feature-settings: "liga" off, "clig" off; }
+.weekday-highlight { color: #202223; font-feature-settings: "liga" off, "clig" off; font-weight: 300; }
+.date-grid { display: flex; margin-top: 27px; width: 100%; max-width: 1093px; gap: 20px; color: #202223; white-space: nowrap; line-height: 1; justify-content: space-between; }
+@media (max-width: 991px) { .date-grid { max-width: 100%; white-space: initial; } }
+.date { font-feature-settings: "liga" off, "clig" off; }
+.date-disabled { color: #8c9196; font-feature-settings: "liga" off, "clig" off; }
+.date-selected { color: #fff; font-feature-settings: "liga" off, "clig" off; font-weight: 500; }
+.dropdown-menu { border-radius: 8px; background: #f0f2f5; box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15); align-self: center; display: flex; margin-top: 33px; width: 564px; max-width: 100%; flex-direction: column; color: #262626; justify-content: start; padding: 12px; font: 400 14px/2 PingFang SC, sans-serif; }
+.dropdown-item { align-self: stretch; background: #f0f2f5; min-height: 40px; width: 100%; gap: 4px; overflow: hidden; white-space: nowrap; padding: 9px 16px; }
+@media (max-width: 991px) { .dropdown-item { max-width: 100%; white-space: initial; } }
+.dropdown-item-selected { align-self: stretch; border-radius: 4px; background: #fff; min-height: 40px; width: 100%; gap: 4px; overflow: hidden; padding: 9px 16px; }
+@media (max-width: 991px) { .dropdown-item-selected { max-width: 100%; } }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+
+<section class="date-range-picker">
+  <div class="title-container">
+    <h2 class="range-title">Date range</h2>
+    <div class="range-selector">
+      <span class="range-text">Last month</span>
+      <div class="range-icon-container">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b86ab02d469cff18888f6c7e634bd2bc3b5e19ce655c7e7204bf1172befeccda?placeholderIfAbsent=true&apiKey=e5421aaa8de243fd88bf8443abf63cc3" class="range-icon" alt="" />
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/671546168007b50c2da85cf59e020522b1a17c331eaf4b8ca7c97bc197d632bf?placeholderIfAbsent=true&apiKey=e5421aaa8de243fd88bf8443abf63cc3" class="range-icon" alt="" />
+      </div>
+    </div>
+  </div>
+  
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <div class="month-selector">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/381c6b0dab5d1b0e1f6c13821175d579c10f8ea634329e9dcc729d5f80397869?placeholderIfAbsent=true&apiKey=e5421aaa8de243fd88bf8443abf63cc3" class="month-icon" alt="" />
+        <span class="month-text">August 2017</span>
+      </div>
+      <div class="month-selector">
+        <span class="month-text">September 2017</span>
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9d99fbed206ad89de0f411f85322ac1ebde769969619c8df6dc286f2479e2089?placeholderIfAbsent=true&apiKey=e5421aaa8de243fd88bf8443abf63cc3" class="month-icon" alt="" />
+      </div>
+    </div>
+    
+    <div class="weekdays">
+      <span class="weekday">Sun</span>
+      <span class="weekday">Mon</span>
+      <span class="weekday-highlight">Tue</span>
+      <span class="weekday">Wed</span>
+      <span class="weekday">Thu</span>
+      <span class="weekday">Fri</span>
+      <span class="weekday">Sat</span>
+      <span class="weekday">Sun</span>
+      <span class="weekday">Mon</span>
+      <span class="weekday">Tue</span>
+      <span class="weekday">Wed</span>
+      <span class="weekday">Thu</span>
+      <span class="weekday">Fri</span>
+      <span class="weekday">Sat</span>
+    </div>
+    
+    <div class="date-grid">
+      <span class="date-disabled">1</span>
+      <span class="date-disabled">2</span>
+      <span class="date-disabled">3</span>
+      <span class="date-disabled">4</span>
+      <span class="date-disabled">5</span>
+      <span class="date">6</span>
+      <span class="date">7</span>
+      <span class="date">8</span>
+      <span class="date-selected">9</span>
+      <span class="date">10</span>
+      <span class="date">11</span>
+      <span class="date">12</span>
+      <span class="date">3</span>
+      <span class="date">4</span>
+    </div>
+    
+    <div class="date-grid">
+      <span class="date">13</span>
+      <span class="date">14</span>
+      <span class="date">15</span>
+      <span class="date-selected">16</span>
+      <span class="date">17</span>
+      <span class="date">18</span>
+      <span class="date">19</span>
+      <span class="date">20</span>
+      <span class="date">21</span>
+      <span class="date">22</span>
+      <span class="date">23</span>
+      <span class="date">24</span>
+      <span class="date">25</span>
+      <span class="date">26</span>
+    </div>
+    
+    <div class="date-grid">
+      <span class="date">27</span>
+      <span class="date">28</span>
+      <span class="date">29</span>
+      <span class="date">30</span>
+      <span class="date">31</span>
+      <span class="date">24</span>
+      <span class="date">25</span>
+      <span class="date">26</span>
+      <span class="date">27</span>
+      <span class="date">28</span>
+      <span class="date">29</span>
+      <span class="date">30</span>
+    </div>
+  </div>
+  
+  <nav class="dropdown-menu">
+    <span class="dropdown-item">Today</span>
+    <span class="dropdown-item">Yesterday</span>
+    <span class="dropdown-item">Last 7 days</span>
+    <span class="dropdown-item">Last 30 days</span>
+    <span class="dropdown-item">Last month</span>
+    <span class="dropdown-item">Last 90 days</span>
+    <span class="dropdown-item-selected">Last month</span>
+    <span class="dropdown-item">Last year</span>
+    <span class="dropdown-item">Week to date</span>
+    <span class="dropdown-item">Week to month</span>
+    <span class="dropdown-item">Quarter to date</span>
+    <span class="dropdown-item">Year to date</span>
+    <span class="dropdown-item">4th quarter (2021)</span>
+    <span class="dropdown-item">3rd quarter (2021)</span>
+    <span class="dropdown-item">2nd quarter (2021)</span>
+    <span class="dropdown-item">1st quarter (2021)</span>
+  </nav>
+</section>
